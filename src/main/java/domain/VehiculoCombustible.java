@@ -6,14 +6,16 @@ public class VehiculoCombustible extends Vehiculo {
     private double kilometrosPorLitro;
     private double litrosExtra;
 
+    // Fíjate en el segundo parámetro: ahora es de tipo Marca
     public VehiculoCombustible(String patente, Marca marca, String modelo, int anio, double capacidadCarga,
                                Sucursal sucursal, double kilometrosPorLitro, double litrosExtra) {
+        // Le pasamos el objeto 'marca' completo a la clase padre
         super(VehiculoTipo.COMBUSTIBLE, patente, marca, modelo, anio, capacidadCarga, sucursal);
         this.kilometrosPorLitro = kilometrosPorLitro;
         this.litrosExtra = litrosExtra;
     }
     
-     public double getKilometrosPorLitro() {
+    public double getKilometrosPorLitro() {
         return kilometrosPorLitro;
     }
 
@@ -23,8 +25,15 @@ public class VehiculoCombustible extends Vehiculo {
 
     @Override
     public double calcularConsumo(double kilometros) {
-        double extras = LocalDate.now().getYear() - anio > 5 ? (kilometros / 15) * litrosExtra : 0;
-        double total = (kilometros / kilometrosPorLitro) + extras;
+        
+        double litrosBase = kilometros / this.kilometrosPorLitro;
+        double litrosPorAntiguedad = 0;
+        if ((LocalDate.now().getYear() - this.anio) >= 5) {
+            litrosPorAntiguedad = ((kilometros / 15)) * this.litrosExtra; 
+        }
+        
+        double total = litrosBase + litrosPorAntiguedad;
+
         return total;
     }
 }
