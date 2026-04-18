@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package domain;
 
-/**
- *
- * @author maxim
- */
 public class Marca {
     private String nombre;
     private String pais;
@@ -31,5 +23,10 @@ public class Marca {
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    @Override
+    public String toString() {
+        return "Marca{" + "nombre=" + nombre + ", pais=" + pais + '}';
     }
 }
